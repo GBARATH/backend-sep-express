@@ -2,7 +2,6 @@ const express=require("express")
 const res = require("express/lib/response")
 const path=require("path")
 const bodyparser=require("body-parser")
-
 const app=express()
 app.use(bodyparser.json())
 app.get("/home",(req,res)=>{
@@ -28,12 +27,7 @@ app.get("/search",(req,res)=>{
 })
 app.post("/signup",(req,res)=>{
     console.log(req.body)
-    if(req.body.email){
-        res.send("signup successfull")
-    }
-    else{
-        res.send("enter your email")
-    }
+    res.send("signup is hit")
 })
 app.all("*",(req,res)=>res.status(404).send("404 Error"))
 app.listen(3001,()=>console.log("server started"))
