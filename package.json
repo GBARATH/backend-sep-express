@@ -6,6 +6,7 @@
   "dependencies": {
     "body-parser": "^1.19.1",
     "express": "^4.17.2",
+    "express-router": "0.0.1",
     "hbs": "^4.2.0",
     "mongoose": "^6.2.3",
     "pug": "^3.0.2"

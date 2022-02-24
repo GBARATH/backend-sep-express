@@ -3,7 +3,9 @@ const res = require("express/lib/response")
 const path=require("path")
 const bodyparser=require("body-parser")
 const app=express()
+const User=require("./models/UserModel")
 app.use(bodyparser.json())
+
 app.get("/home",(req,res)=>{
     res.status(200).sendFile(path.join(__dirname+"/static/index.html"))
 })
@@ -25,9 +27,6 @@ app.get("/search",(req,res)=>{
    }
     res.send("dummy")
 })
-app.post("/signup",(req,res)=>{
-    console.log(req.body)
-    res.send("signup is hit")
-})
+
 app.all("*",(req,res)=>res.status(404).send("404 Error"))
 app.listen(3001,()=>console.log("server started"))
