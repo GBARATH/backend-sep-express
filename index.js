@@ -27,6 +27,17 @@ app.get("/search",(req,res)=>{
    }
     res.send("dummy")
 })
-
+app.post("/signup",(req,res)=>{
+    const data=req.body
+    const userObj=new User({
+        username:data.username,
+        email:data.email,
+        password:data.password,
+        area:data.area,
+        pincode:data.pincode,
+        interests:data.interests
+    })
+    userObj.save().then(()=>res.send("user added successfully"))
+})
 app.all("*",(req,res)=>res.status(404).send("404 Error"))
 app.listen(3001,()=>console.log("server started"))
