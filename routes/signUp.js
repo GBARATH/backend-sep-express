@@ -1,8 +1,11 @@
 const express=require("express")
 const router=express.Router()
-router.post("/signup",(req,res)=>{
+const bcrypt = require("bcrypt")
+const User=require("../models/UserModel")
+router.post("/signup",async (req,res)=>{
     console.log("inside route")
     const data=req.body
+    data.password=await bcrypt.hash(data.password,6)
     const userObj=new User({
         username:data.username,
         email:data.email,
@@ -11,6 +14,6 @@ router.post("/signup",(req,res)=>{
         pincode:data.pincode,
         interests:data.interests
     })
-    userObj.save().then(()=>res.send("user added successfully"))
+    await userObj.save().then(()=>res.send("user added successfully"))
 })
 module.exports=router

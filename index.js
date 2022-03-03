@@ -5,7 +5,6 @@ const bodyparser=require("body-parser")
 const app=express()
 const User=require("./models/UserModel")
 app.use(bodyparser.json())
-
 app.get("/home",(req,res)=>{
     res.status(200).sendFile(path.join(__dirname+"/static/index.html"))
 })

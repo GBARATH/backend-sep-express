@@ -15,7 +15,7 @@ const userSchema=mongoose.Schema({
         type:String,
         required:[true,"enter username"],
         minlength:[5,"minimum length should be 5 characters"],
-        maxlength:[10,"maximum length should be 10 characters"]
+       
     },
     area:String,
     pincode:Number,
