@@ -15,7 +15,6 @@ const userSchema=mongoose.Schema({
         type:String,
         required:[true,"enter username"],
         minlength:[5,"minimum length should be 5 characters"],
-       
     },
     area:String,
     pincode:Number,
@@ -23,9 +22,35 @@ const userSchema=mongoose.Schema({
         type:String,
         default:"IND"
     },
+    address:String,
     interests:String
 
 })
+//custom method
+userSchema.methods.saveCustom=async function(){
+    try{
+        const user=this
+        console.log(user.address)
+        if(user.address){
+            return this.save()
+        }
+        else{
+            user.address=user.area+" "+user.country+" "+user.pincode
+            return this.save()
+        }
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+userSchema.statics.signin=async function(ipemail,password){
+    const res=await User.findOne({email:ipemail})
+    console.log(res)
+    console.log(res.password)
+    return res.password
+}
 const User=mongoose.model("EmployeeModel",userSchema)
-//record
+
+
+
 module.exports=User;

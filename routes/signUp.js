@@ -11,9 +11,11 @@ router.post("/signup",async (req,res)=>{
         email:data.email,
         password:data.password,
         area:data.area,
+        address:data.address,
         pincode:data.pincode,
         interests:data.interests
     })
-    await userObj.save().then(()=>res.send("user added successfully"))
+    await userObj.saveCustom()
+    res.send("user added ")
 })
 module.exports=router
