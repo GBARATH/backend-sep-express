@@ -47,7 +47,7 @@ userSchema.statics.signin=async function(ipemail,password){
     const res=await User.findOne({email:ipemail})
     console.log(res)
     console.log(res.password)
-    return res.password
+    return res.pass
 }
 const User=mongoose.model("EmployeeModel",userSchema)
 

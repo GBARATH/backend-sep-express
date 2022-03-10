@@ -5,9 +5,10 @@ const User=require("../models/UserModel")
 router.post("/signin",async (req,res)=>{
     const data=req.body
    const userres= await User.findOne({email:data.email})
-   console.log(userres)
+  console.log(userres.password)
    if(userres){
    const authen= await bcrypt.compare(data.password,userres.password)
+   console.log(authen)
    if(authen){
        res.send({status:true,msg:"success"})
    }
