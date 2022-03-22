@@ -2,7 +2,8 @@ const express=require("express")
 const router=express.Router()
 const bcrypt = require("bcrypt")
 const User=require("../models/UserModel")
-router.get("/getbyarea/",async (req,res)=>{
+const authorize=require("../middleware/Authorize")
+router.get("/getbyarea/",authorize,async (req,res)=>{
 const querydata=req.query
 const areadata=await User.find({area:querydata.area})
 console.log(areadata)

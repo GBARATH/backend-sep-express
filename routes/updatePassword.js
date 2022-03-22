@@ -2,7 +2,9 @@ const express=require("express")
 const router=express.Router()
 const bcrypt = require("bcrypt")
 const User=require("../models/UserModel")
-router.post("/updatepassword",async (req,res)=>{
+const jwt=require("jsonwebtoken")
+const authorize=require("../middleware/Authorize")
+router.post("/updatepassword",authorize,async (req,res)=>{
 const querydata=req.body
 const userobj=await User.findOne({email:querydata.email})
 console.log(userobj.password)
@@ -26,8 +28,16 @@ if(userobj){
 
     
 })
-router.post("/updatecountry",async (req,res)=>{
-    const querydata=req.body
+router.post("/updatecountry",authorize,async (req,res)=>{
+  const querydata=req.body
+   /*  const reqtoken=req.headers["authorization"]
+    const token=reqtoken.replace("Bearer ","")
+    try{
+       const decodedtoken= jwt.verify(token,"jamesbond")
+    }
+    catch(err){
+        res.send({status:false,msg:"bad authorization"})
+    }*/
     const userobj=await User.findOne({email:querydata.email})
     if(userobj){
        const updatecty= await User.findByIdAndUpdate(userobj._id,{country:querydata.country})
